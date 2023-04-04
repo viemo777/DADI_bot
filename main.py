@@ -23,5 +23,9 @@ def start(message: Message):
     bot_client.reply_to(message=message, text=str(f'Вы зарегистрированы: {username}. '
                                                   f'Ваш ID: {user_id}'))
 
+@bot_client.message_handler(commands=['say_speech'])
+def say_speech(message: Message):
+    bot_client.send_message(chat_id=ADMIN_ID, text=str(f'Добрый день. Меня зовут DADIbot. Спросите меня о чем-нибудь'))
+
 
 bot_client.polling()
