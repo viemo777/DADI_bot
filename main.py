@@ -1,3 +1,8 @@
+# add params to env file
+# ADMIN_CHAT_ID = 568869711
+# TOKEN = "6083612607:AAEUMjnLkTX8zzlW6VO2KGRdGxC8JU2KLvE"
+# TOKEN - берется из @BotFather
+
 import json
 from datetime import datetime
 from json import JSONDecodeError
@@ -6,31 +11,35 @@ import telebot
 from envparse import Env
 from telebot.types import Message
 
+from DB import UserActioner, PostgresClient
 from live import TelegramClient
 
 env = Env()
 TOKEN = env.str('TOKEN')
 ADMIN_CHAT_ID = env.str('ADMIN_CHAT_ID')
 
-
-# add params to env file
-# ADMIN_CHAT_ID = 568869711
-# TOKEN = "6083612607:AAEUMjnLkTX8zzlW6VO2KGRdGxC8JU2KLvE"
-# TOKEN - берется из @BotFather
+postgres_client = PostgresClient(database="mydb", user='postgres', password='marmak', host='127.0.0.1', port='5432')
 
 
 class MyBot(telebot.TeleBot):
-    def __init__(self, telegram_client: TelegramClient, *args, **kwargs):
+    def __init__(self, telegram_client: TelegramClient, user_actioner: UserActioner, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.telegram_client = telegram_client
+        self.user_actioner = user_actioner
+
+    def setup_resources(self):
+        self.user_actioner.setup()
 
 
 telegram_client = TelegramClient(token=TOKEN, base_url='https://api.telegram.org/bot')
-bot = MyBot(token=TOKEN, telegram_client=telegram_client)
+user_actioner = UserActioner(db_client=postgres_client)
+bot = MyBot(token=TOKEN, telegram_client=telegram_client, user_actioner=user_actioner)
+bot.setup_resources()
 
 
 @bot.message_handler(commands=['start'])
 def start(message: Message):
+    # секция для записи новых пользователей в json файл.
     with open('users.json', 'r') as f:
         data_from_json = json.load(f)
 
@@ -42,8 +51,19 @@ def start(message: Message):
     with open('users.json', 'w') as f:
         json.dump(data_from_json, f, indent=4, ensure_ascii=False)
 
-    bot.reply_to(message=message, text=str(f'Вы зарегистрированы: {username}. '
-                                           f'Ваш ID: {user_id}'))
+    # альтернативная секция для записи новых пользователей в postgres BD.
+    user_id = message.from_user.id
+    username = message.from_user.username
+    chat_id = message.chat.id
+    create_new_user = None
+
+    if not bot.user_actioner.get_user(user_id=user_id):
+        create_new_user = bot.user_actioner.create_user(user_id=user_id, username=username, chat_id=chat_id)
+        create_new_user = True
+
+    # бот отвечает в чате на команду /start
+    bot.reply_to(message=message, text=f'Вы {"уже" if not create_new_user else ""} зарегистрированы: {username}. '
+                                           f'Ваш ID: {user_id}')
 
 
 def handle_messages(message: Message):
