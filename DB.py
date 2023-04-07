@@ -90,8 +90,6 @@ class UserActioner:
             )'''
             self.db_client.execute_command(command=create_table_users)
 
-
-
 # # Establishing the connection
 # postgres_client = PostgresClient(database="mydb", user='postgres', password='marmak', host='127.0.0.1', port='5432')
 # conn = postgres_client.create_connection()
