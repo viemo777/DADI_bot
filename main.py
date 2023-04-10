@@ -4,8 +4,10 @@
 # TOKEN - берется из @BotFather
 
 import json
-from datetime import datetime
+
+from datetime import datetime, date
 from json import JSONDecodeError
+from logging import StreamHandler, getLogger
 
 import telebot
 from envparse import Env
@@ -14,6 +16,12 @@ from telebot.types import Message
 from ChatGPT import OpenAIWrapper
 from DB import UserActioner, PostgresClient
 from live import TelegramClient
+
+# секция работы с логгированием
+logger = getLogger(__name__)
+logger.addHandler(StreamHandler())
+logger.setLevel("INFO")
+# конец секцим работы с логгированием
 
 env = Env()
 TOKEN = env.str('TOKEN')
@@ -34,11 +42,16 @@ class MyBot(telebot.TeleBot):
     def setup_resources(self):
         self.user_actioner.setup()
 
+    def shutdown_resources(self):
+        self.user_actioner.shutdown()
+
+    def shutdown(self):
+        self.shutdown_resources()
+
 
 telegram_client = TelegramClient(token=TOKEN, base_url='https://api.telegram.org/bot')
 user_actioner = UserActioner(db_client=postgres_client)
 bot = MyBot(token=TOKEN, telegram_client=telegram_client, user_actioner=user_actioner)
-bot.setup_resources()
 
 
 @bot.message_handler(commands=['start'])
@@ -81,6 +94,7 @@ def handle_messages(message: Message):
 
 @bot.message_handler(commands=['say_speech'])
 def say_speech(message: Message):
+    bot.user_actioner.update_last_date(user_id=message.from_user.id, last_date=date.today())
     bot.send_message(message.from_user.id, text='Дoбрый день. Я Vitalii_bot. Назовите ваше имя')
     bot.register_next_step_handler(message, callback=handle_messages)
 
@@ -101,12 +115,19 @@ def create_error_message(err: Exception) -> str:
 
 while True:
     try:
+        bot.setup_resources()
         bot.polling()
     # inform admin about error
     except JSONDecodeError as err:
+        # секция работы с логгированием
+        error_message = create_error_message(err)
+        logger.error(error_message)
+        # конец секцим работы с логгированием
+
         # ADMIN_CHAT_ID - ID of administator's chat for informing about errors.
         # Вариант записи ошибок в админский телеграмм канал ADMIN_CHAT_ID
         bot.send_message(ADMIN_CHAT_ID, text='Ошибка: ' + f'{datetime.now()} ::: {err.__class__}: {err}')
         # альтернативный способ записи ошибки в админсткий телеграмм канал ADMIN_CHAT_ID через post запрос
         bot.telegram_client.post(method='sendMessage',
-                                 params={'text': 'Error: ' + f'create_error_message(err)', 'chat_id': ADMIN_CHAT_ID})
+                                 params={'text': 'Error: ' + f'error_message', 'chat_id': ADMIN_CHAT_ID})
+        bot.shutdown()
