@@ -1,5 +1,6 @@
 # секция работы с логгированием
 from logging import getLogger, StreamHandler
+# конец секцим работы с логгированием
 
 from envparse import Env
 from datetime import date
@@ -7,6 +8,7 @@ from datetime import date
 from DB import PostgresClient
 from live import TelegramClient
 
+# секция работы с логгированием
 logger = getLogger(__name__)
 logger.addHandler(StreamHandler())
 logger.setLevel("INFO")
@@ -14,6 +16,7 @@ logger.setLevel("INFO")
 
 env = Env()
 TOKEN = env.str('TOKEN')
+
 
 class Reminder:
     GET_TASKS_QUERY = """
@@ -35,12 +38,18 @@ class Reminder:
 
     def notify(self, chat_ids: list):
         for chat_id in chat_ids:
-            res = self.telegram_client.post(method='sendMessage', params={'chat_id': chat_id, 'text': 'Вы сегодня не отчитались. Завершите'})
+            res = self.telegram_client.post(method='sendMessage',
+                                            params={'chat_id': chat_id, 'text': 'Вы сегодня не отчитались. Завершите'})
+            # секция работы с логгированием
             logger.info(res)
+            # конец секцим работы с логгированием
 
     def __call__(self, *args, **kwargs):
         if not self.setted_up:
+            # секция работы с логгированием
             logger.error('Reminder is not setted up')
+            # конец секцим работы с логгированием
+
             return
         self.execute()
 
@@ -49,9 +58,11 @@ class Reminder:
         if chat_ids:
             self.notify(chat_ids=[tuple_from_db[0] for tuple_from_db in chat_ids])
 
+
 if __name__ == '__main__':
     telegram_client = TelegramClient(TOKEN, base_url='https://api.telegram.org/bot')
-    postgress_client = PostgresClient(database="mydb", user='postgres', password='marmak', host='127.0.0.1', port='5432')
+    postgress_client = PostgresClient(database="mydb", user='postgres', password='marmak', host='127.0.0.1',
+                                      port='5432')
     reminder = Reminder(telegram_client, postgress_client)
     reminder.setup()
     reminder.execute()

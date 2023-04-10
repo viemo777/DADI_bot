@@ -1,7 +1,7 @@
 # add params to env file
 # ADMIN_CHAT_ID = 568869711
 # TOKEN = "6083612607:AAEUMjnLkTX8zzlW6VO2KGRdGxC8JU2KLvE"
-# TOKEN - берется из @BotFather
+# TOKEN - токен чатбота, берется из @BotFather
 
 import json
 
@@ -98,16 +98,24 @@ def say_speech(message: Message):
     bot.send_message(message.from_user.id, text='Дoбрый день. Я Vitalii_bot. Назовите ваше имя')
     bot.register_next_step_handler(message, callback=handle_messages)
 
+
 def send_respond(message: Message):
     # бот отсылает вопрос в ChatGpt API и полученный ответ пишет в чат
     openAIWrapper = OpenAIWrapper()
-    bot.send_message(message.from_user.id, text=openAIWrapper.get_answer(message.text))
+    response = openAIWrapper.get_answer(message.text)
+    bot.send_message(message.from_user.id, text=response)
 
 
 @bot.message_handler(commands=['lets_chat'])
 def lets_chat(message: Message):
     bot.send_message(message.from_user.id, text='Задай мне вопрос на любую тему')
     bot.register_next_step_handler(message, callback=send_respond)
+
+# бот отвечает на любое сообщение в чате, кроме указанных выше команд
+@bot.message_handler(func=lambda message: True)
+def echo_all(message: Message):
+    bot.send_message(message.from_user.id, OpenAIWrapper().get_answer(message.text))
+
 
 def create_error_message(err: Exception) -> str:
     return f'Error: {datetime.now()} ::: {err.__class__}: {err}'

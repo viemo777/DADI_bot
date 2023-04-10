@@ -5,27 +5,39 @@ import os
 from envparse import Env
 
 env = Env()
-OPENAI_KEY = env.str("OPENAI_KEY")
-openai.api_key = OPENAI_KEY
+OPENAI_API_KEY = env.str("OPENAI_API_KEY")
+openai.api_key = OPENAI_API_KEY
+
 
 class OpenAIWrapper:
 
     def __init__(self):
-        #self.model = "text-davinci-002"
-        self.model = "text-davinci-002"
-        self.temperature = 0.7
-        self.max_tokens = 2000
+        self.model = "text-davinci-003"
+        self.temperature = 0.9
+        self.max_tokens = 256
+        self.top_p = 1.0
+        self.frequency_penalty = 0.0
+        self.presence_penalty = 0.6
+        self.stop = ["\n", " Human:", " AI:"]
+
     def get_answer(self, prompt):
         response = openai.Completion.create(
             engine=self.model,
             prompt=prompt,
             temperature=self.temperature,
-            max_tokens=self.max_tokens
+            max_tokens=self.max_tokens#,
+            #top_p=self.top_p,
+            # frequency_penalty=self.frequency_penalty,
+            # presence_penalty=self.presence_penalty
         )
-        return response.choices[0].text
+        return response['choices'][0]['text']
 
+# oai = OpenAIWrapper()
+# prompt = "Сколько рогов у коровы?:"
+# print(f'Тестовый вопрос: {prompt}')
+# print(f'Тестовый ответ: {oai.get_answer(prompt)}')
 
-# -------------- examples
+#  -------------- examples
 # import openai
 # import os
 #

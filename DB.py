@@ -68,7 +68,6 @@ class UserActioner:
     CREATE_USER = """
         INSERT INTO users (user_id, username, chat_id) VALUES (%s, %s, %s)
         """
-
     GET_USER = """
         SELECT * FROM users WHERE user_id = %s
         """
