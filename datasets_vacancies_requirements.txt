@@ -1,0 +1,595 @@
+Contents
+Senior DevOps Engineer	1
+Sr. DevOps engineer	3
+Sr. DevOps engineer	4
+DevOps Engineer	5
+Quality Assurance Engineer	7
+Agile Program Manager	8
+Senior Data QA Engineer	10
+Automation QA Engineer	13
+Automation QA Engineer	14
+DevOps Engineer	15
+Scrum Master	17
+Senior Business Analyst	18
+BI Engineer	19
+QA manual testing	20
+
+
+
+Senior DevOps Engineer
+
+About the job
+Responsibilities
+
+•	Manage environments in cloud (Azure) – Dev & QA
+•	Be in charge of: Automate Build process (Build, Run Unit tests, Run sonar quality scan, Build artifact) and Deployment process
+•	Release artifacts process
+•	Proactively monitor and maintain production applications availability
+•	Act as first-line responders to critical application/platform issues (E.g. Application availability, transaction failures)
+•	Collaborate with the team and others to resolve tickets, act as a point of contact for teams that require data, logs, configuration, info from the protected payment systems
+•	Release new applications and application configuration to Preproduction and Production environments
+•	Identify areas of improvement with regards to recurring support requests and areas that can be automated
+APPLY NOW
+
+Qualifications And Experience
+
+•	4-5+ years’ experience in a relevant field
+•	Experience implementing Continuous Delivery flows for Java and/or .NET applications
+•	Proven experience with Public Cloud providers (AWS, Azure, GCP)
+•	Infrastructure as Code tools (AWS CloudFormation, Terraform)
+•	Configuration Management tools (Ansible, Chef, Puppet, others)
+•	Scripting languages (Bash, Python, others)
+•	Monitoring and logging analytic tools (Grafana, ELK stack, Splunk, others)
+•	Excellent understanding of Infrastructure, Virtualization, Containers, Networking
+About Endava
+
+Endava has a long history of delivering IT solutions to some of the world's best-known brands. With ambitious growth plans, we are looking for an experienced technical professional who shares our passion for technology while taking care of our customers and their technology landscape. We aim to attract talented IT professionals who possess drive, initiative, enthusiasm, and who are flexible and good team players. We foster an environment of learning and sharing, encouraging our staff to develop relevant skills and increase performance. We value proactive professionals and support them in developing their leadership talent.
+
+
+
+Would Be a Plus
+
+Additional Information
+
+•	Architecting Cloud solutions
+•	Docker, building and deploying containers
+•	Container Orchestration systems (Kubernetes)
+•	Understanding of?Microservices Architecture principles
+Benefits
+
+•	International exposure, working with colleagues and customers across different countries
+•	Get experience in different business areas (Finance, Digital Media, Insurance, Telecom, Payment, Banking, etc.)
+•	Trainings/certifications and career development
+•	Access to corporate library and online learning tools
+•	Endava referral bonus
+•	Additional Health insurance, sport compensation, flexible work hours, loyalty programs, English courses
+
+Sr. DevOps engineer
+
+About the job
+Job Overview
+
+Under broad guidance, performs activities related to the analysis, design, programming, debugging, modification, and maintenance of software enhancements and/or new products.
+
+Essential Functions
+
+•  Under broad guidance, analyzes, designs, programs, debugs, modifies, and maintains software enhancements and/or new products used in local, networked, or Internet-related computer programs.
+•  Under broad guidance, may interact with users to define system requirements and/or necessary modifications.
+•  Prepares feasibility studies to evaluate requirements for new and revised programs.
+•  Translates detailed design specifications into computer program instructions, debugs routine programs, prepares system test data and prepares program documentation.
+•  Completes documentation and procedures for installation and maintenance.
+•  Code may be used in commercial or end-user applications, such as desktop applications, mobile apps, financial management, or HRIS products.
+•  Using current programming language and technologies, writes code, completes programming, and performs testing and debugging of applications.
+Qualifications
+
+•	Bachelor's Degree Computer Science or related discipline
+•	Incumbent possesses and has demonstrated basic knowledge of systems and software development with a minimum of two (2) years of software development experience.
+•	Lead the building of a dedicated, enthusiastic team of software developers and engineers.
+•	Collaborate closely with developers and data scientists.
+•	Build and own your team’s roadmap, ensuring alignment with stakeholders in data-science and consulting functions.
+•	Promote best-practice software development and related technologies and participate in the full software life-cycle.
+•	Lead agile practices such as daily stand ups, sprint planning, sprint refinements, and retrospectives; work to fortnightly sprints and organize bi-weekly demos across multiple teams.
+•	Deliver development reports, milestones and delivery schedules to the business.
+•	Work alongside other team members such as Product Owners and Software QA to manage the development cycle from ‘thought to delivery.’
+IQVIA is a leading global provider of advanced analytics, technology solutions and clinical research services to the life sciences industry. We believe in pushing the boundaries of human science and data science to make the biggest impact possible – to help our customers create a healthier world. Learn more at https://jobs.iqvia.com
+
+Sr. DevOps engineer
+
+Efficiency is a key term in a growing population. How do you achieve that? By working in a central system with multiple software systems. Will you help make the cities safer?
+
+What do they do?
+Our client develops high-quality technologies, to help public and private companies improve their operations. Ranging from mobile payment, enforcement, permitting systems to mobile scanning solutions. The reported data is combined in the back office, where it is used for safety purposes. In their web application, they offer the best overview of their data.
+
+Sounds nice! What could I do?
+For their office in Amsterdam, they are looking for a talented Engineer to join their growing team and to help them build and implement new solutions.
+
+As a DevOps Engineer, you’ll have a total view of the whole release process in combination with your overall experience in infrastructure. In order to expand and improve the platform, you are in charge of this vital part of the organization. Signalizing bottlenecks and bugs are also one of your responsibilities, as well as solving them. Thanks to you, this whole process works like a Swiss watch.
+
+What experience do I need to bring?
+Your experience with AWS is excellent, together with your thorough background in Jenkins you are almost there. An eye for detail and quality is what makes you suited for this job, as well as your structural working skills.
+
+What do I receive in return?
+You will work at the office in Amsterdam with a young and experienced team of outstanding developers. A monthly salary of up to €4500 gross with great secondary benefits is very satisfying. The team is not only very capable but also fun, thanks to the events and the common lunches. If this sounds like the perfect car to drive in, just click Apply!
+
+DevOps Engineer
+
+About the job
+DevOps Engineer
+
+To accelerate our international expansion, we are looking for a DevOps Engineer who will maintain, monitor and expand the Jedlix Smart Charging platform / infrastructure: the leading platform that enables the seamless integration of electric vehicles on the power grid. The platform integrates with partnered EV brands such as Renault, Tesla, BMW, Audi and Jaguar, control the charging of the EVs and drive the interactions of our mobile applications.
+
+Responsibilities:
+•	Implement reproducible Infrastructure that improves the stability, scalability and availability of the Jedlix platform
+•	Build effective monitoring to monitor the health of your system, and jump in to handle outages
+•	Develop tools to assist the development teams with successfully deploying changes every day
+•	Be an advocate of engineering best practices
+•	Share the on-call rotation and be an escalation contact for incidents
+
+Your colleagues:
+You will be working in a team who are enthusiastic about electric vehicles and green energy. You'll have daily interactions with colleagues from various areas of expertise which gives you a unique opportunity to expand your knowledge and learn every day on the job.
+
+Professional and Personal Development:
+It is important to us that you continue to develop yourself. We give you the space and the confidence to grow in your career as well as a person. We help you with:
+•	Plenty of training and learning opportunities
+•	An international network of colleagues who are eager to share their knowledge with you
+
+Employee Benefits:
+•	Work on things that really matter! Electric cars and renewable energy are here to stay and with smart charging market leader Jedlix, you are at the forefront of this clean disruption!
+•	A competitive salary, with an additional 8% of your annual salary in holiday pay.
+•	Excellent pension scheme executed by Lifesight, where we will add 8% of your annual salary in pension premium, and offer you the flexibility to make additional deposits.
+•	25 leave days and flexibility to buy more from your gross salary
+•	Feel free to take one of our own cars for a spin to get some first-hand smart charging experience!
+•	Hybrid working and flexible working hours. We provide you flexibility in working remote and on-site at our office. The Jedlix headquarters is located in the beautiful city centre of Rotterdam, right next to the Central Station in one of the biggest start-up hubs in Rotterdam. Also, table tennis, pool table, a football table, great coffee, fresh fruit and a fridge filled with soda beers and Champagne ready for the next celebration.
+•	Fun and Ownership; we have a young and agile team, so we value your opinion to shape our strategy and way of working.
+
+Requirements
+•	Minimum of 2-3 years infrastructure software engineering experience.
+•	Fluency in English, both spoken and written
+
+Working experience with:
+•	Terraform
+•	(Managed) Kubernetes*
+•	Microsoft Azure (resource groups, etc)
+•	Docker
+•	(Linux) VM's
+•	CI / CD pipelines (preferably in Azure DevOps)
+•	SQL Server
+
+Nice to have experiences:
+•	Grafana
+•	Ansible
+•	Redis
+•	Influx DB
+•	Queues / Event-hubs (e.g. RabbitMQ, Azure Eventhub, ...)
+•	Jaeger/ Open Telemetry
+* The Kubernetes cluster is managed by Microsoft (AKS), so deep knowledge on how to run bare metal Kubernetes is not required
+Quality Assurance Engineer
+
+About the job
+About FFW
+
+For over 20 years, FFW has provided significant digital experiences to the world’s largest brands many within the Fortune 50 in finance, power, media, healthcare, and pharmaceuticals. FFW is a team of more than 400 people across 11 countries and growing fast. Not only do we work with large organizations, but we have a diverse portfolio across various verticals working on a variety of mission critical digital solutions. https://ffwagency.com/digital-services
+
+A successful candidate will have the following knowledge and experience:
+
+•	Cross-browser and responsive testing
+•	Creation and maintenance of testing documents
+•	Follow test plans outlined by the QA manager
+•	Effectively communicates bugs and issues to our development team
+•	Profile front-end load times for our websites
+•	Testing of exports and Import (XML, JSON, CSV, XLS, etc)
+•	Use browser tools and add-ons to verify CSS and JS code
+•	Testing of web services: SOAP and REST
+•	May be required to use automated tools as we acquire the processes
+Requirements
+
+•	2+ years of experience in QA, preferably in web testing area
+•	Proven experience in web applications testing
+•	Knowledge of the most popular web-browsers
+•	A clear understanding of basic software development and testing processes
+•	Knowledge of defect submitting principles and management in a bug tracking system
+•	Ability to diagnose failed test cases before opening bugs
+•	Ability to perform repeated tests with the same eye for details
+•	Ability to plan own tasks and utilize time in the best way
+•	Stress-resistant, being able to work towards deadlines
+•	Self-motivated, efficient, creative
+•	Ability to deal with multiple projects
+•	Basic databases/SQL knowledge
+•	Basic Knowledge and understanding of Web technologies (HTML, CSS, JS, AJAX, etc.)
+•	Strong written and verbal communication skills are required
+Agile Program Manager
+About Toptal
+
+Toptal is a global network of top freelance talent in business, design, and technology that enables companies to scale their teams, on-demand. With $200+ million in annual revenue and over 40% year-over-year growth, Toptal is the world’s largest fully remote company.
+
+We take the best elements of virtual teams and combine them with a support structure that encourages innovation, social interaction, and fun. We see no borders, move at a fast pace, and are never afraid to break the mold.
+
+Position Description
+
+Would you like to join one of technology’s fastest-growing companies and help support that growth across a fully-remote Engineering organization of over 45 technical and product development teams? If you are a project management professional with strong business acumen and an Agile mindset, you love mentoring, coaching, and have a solid experience in software products delivery, you might be a match for our growing team.
+
+Along with helping address the organizational challenges that come with Toptal’s 40% year-over-year growth, the PMO team is on a mission to strengthen Toptal’s project management capabilities. We do this by cultivating a modern Agile culture, promoting a strong delivery mindset across Product Management and Engineering functions, executing strategic projects, designing the tools/frameworks to help teams perform their best at scale. We’re not a startup anymore, but we still have that creative drive and a performance mindset.
+
+A typical day in the PMO could see you mentoring a newly-promoted Engineering Manager and their team in the morning on Scrum ceremonies, working on one or more of Toptal’s strategic projects in the afternoon, working with Product Managers on a new business case, then wrapping up the day aligning with the other Program Managers.
+
+If you are a strong leader who pulls with the team, thrives by seeing others succeed, and wants to be a part of driving the World’s Greatest Talent Company to become a world-class enterprise business, start a conversation with us.
+
+This is a remote position that can be done from anywhere. Due to the remote nature of this role, we are unable to provide visa sponsorship. Resumes and communication must be submitted in English.
+
+Responsibilities
+
+Your ultimate mission is to be a delivery business partner to our Product and Engineering Directors. You will apply project management and Agile knowledge, skills, tools, and techniques to ensure projects within your program successfully generate business outcomes, product development and technical engineering teams are happy, and stakeholders are satisfied.
+
+•	Drive two-three high-priority time-sensitive projects that require coordination between multiple Agile teams and various stakeholders across the organization on a tactical and strategic level. Identify dependencies, guide decision-making, solve problems, and provide analytical insights about the project performance.
+•	Oversee projects within your program, monitoring their progress and the status of the work teams engage in, ensuring successful, timely deliveries.
+•	Identify and surface any bottlenecks and impediments that slow delivery momentum within your program. Continually work on improving the program structure and processes, proposing optimization opportunities by constantly iterating our working methods and acting as a change agent for their implementation.
+•	Build sustainable and great relationships between the PMO team and stakeholders across Toptal.
+•	Work with the rest of the PMO team to further develop the function, ensuring it results in a healthy, collaborative, continuously improving Agile delivery culture at Toptal.
+•	Teach or mentor less experienced Toptalers in modern Agile concepts, values, principles, practices, and better project management practices.
+In The First Week, Expect To
+
+•	Onboard and integrate into Toptal.
+•	Get familiar with our product portfolio and team structure.
+•	Learn about Program Management Office vision, mission, OKRs.
+•	Become familiar with Toptal’s Product Development Process.
+In The First Month, Expect To
+
+•	Take the lead on one of our strategic projects.
+•	Gain an understanding of the Engineering and Product quarterly planning process.
+In The First Three Months, Expect To
+
+•	Gain the trust of PMO business partners.
+•	Begin evangelizing Toptal’s Product Development Process.
+In The First Six Months, Expect To
+
+•	Share knowledge and experience with colleagues and help to foster a mature Agile delivery culture across product and engineering teams.
+In The First Year, Expect To
+
+•	Become a role model for less experienced colleagues.
+Requirements
+
+•	Be excellent in networking, stakeholder management across all organizational levels.
+•	Have professional project management experience in software product development.
+•	You are self-driven and know what to do with the freedom you are given.
+•	Be a true do-er able to deal with agile at scale challenges and loads of ambiguity.
+•	Have a fundamental understanding of how to manage organizational changes - you will need this to challenge the status quo.
+•	You are an expert in Scrum, and you are at least familiar with Kanban (if not, we’ll teach you).
+•	Ideally, have experience in scaled Agile frameworks LeSS and SoS, SAFe.
+•	Be a confident public speaker and facilitator.
+•	Understand working with technical teams, but possess business acumen.
+•	You must be a world-class individual contributor to thrive at Toptal. You will not be here just to tell other people what to do.
+
+Senior Data QA Engineer
+
+Who We Are
+
+We’re a cast of characters working to shine a spotlight on anime. Crunchyroll is an international business focused on creating both online and offline experiences for fans through content (licensed, co-produced, originals, distribution), merchandise, events, gaming, news, and more. Visit our About Us pages for more information about our collection of brands.
+
+Crunchyroll COVID-19 Hiring Status
+
+Crunchyroll employees are currently working from home, and we are still conducting remote interviews and hiring during this time. This role is expected to start remotely, and we’ll work closely with you as we understand every person has unique circumstances.
+
+Location: Chisinau
+
+Awarded a top Moldovan employer of the year in 2021, our growing team in Chișinău develops the product, design, engineering, and marketing that brings our community of passionate fans together.
+
+About The Team
+
+Our Quality Assurance and Quality Engineering teams champion Crunchyroll’s goal of delivering high-quality video and rich content to our users on multiple platforms. In addition to devising testing strategies and evaluating feature quality, our quality engineers take part in feature planning and design reviews, to contribute their ideas and to ensure testability.
+
+About You:
+
+
+•	4+ years of working experience in Quality Assurance
+•	Experience with SQL and ETL testing
+•	Knowledge of Testing Foundations (methodologies, SDLC, approaches, techniques, and quality assurance principles)
+•	Knowledge of AWS Athena/Redshift, Oracle SQL Developer or/and Microsoft SQL Server
+•	Able to demonstrate analytical and problem-solving skills, considering negative and edge-case scenarios as well as positive scenarios
+•	High attention to detail and methodical approach to test preparation, execution, and reporting
+•	Ability to understand end-user requirements
+•	Experience with test management tools like Test Rail
+•	Experience with issue tracking tools such as JIRA
+•	Positive and proactive attitude with the ability to effectively manage own time
+•	Advanced knowledge of English, strong written and verbal communication
+•	Bachelor's Degree in Computer Science, Engineering or other related fields
+
+A day in the life of our Data QE Engineers:
+
+
+•	Responsible for testing data services, ETL, reporting systems
+•	Analyzing new features, identifying requirement gaps, creating scenarios
+•	Provide QA effort estimations
+•	Creating and executing manual test cases to verify whether the software solutions meet the requirements and quality standards expected
+•	Analyzing data, identifying issues and data inconsistencies
+•	Identifying, investigating and reporting defects proactively
+•	Reviewing and contributing to the revision of acceptance criteria for accuracy, clarity, and completeness
+•	Running and analyzing automated test case results
+•	Reporting testing progress to the Test Lead
+
+Benefits and Perks:
+
+
+•	Stay Healthy - Private health, dental and vision insurance, including full insurance package for kids;
+•	Take Time for You - Accrued PTO, sick days, social PTO, and flexible schedule;
+•	Refuel - Catered meals, snacks & beverages;
+•	Find Balance - On-site gym*, yoga & wellness classes, counselling and support through Talkspace;
+•	Work hard, watch hard - Free premium access to Crunchyroll;
+•	Level Up - Prepaid Udemy account, English and Romanian classes, professional development courses & conferences;
+•	Press Play - Game nights, anime nights, online team buildings & celebrations;
+•	That's not all - Referral bonus, Spot bonus, Employee morale budget, Utilities compensation, Crunchyroll Store discount, & other.
+•	Due to health and safety considerations, during the pandemic, this benefit is temporarily not available.
+
+Questions about Crunchyroll's hiring process? Please check out our FAQ
+
+Please beware of recent scams to online job seekers. Those applying to our job openings will only be contacted directly from @crunchyroll.com and @ellation.com email accounts. If you have any questions of the authenticity of an Ellation or Crunchyroll job offer, please contact recruiting@crunchyroll.com before giving away any information.
+
+About Crunchyroll
+
+Crunchyroll connects anime and manga fans across 200+ countries and territories with the content and experiences they love. In addition to free ad-supported and subscription premium content, Crunchyroll serves the anime community across events, theatrical, games, consumer products, collectibles and manga publishing.
+
+Anime fans have access to one of the largest collections of licensed anime through Crunchyroll and translated in multiple languages for viewers worldwide. Viewers can also access simulcasts — top series available immediately after Japanese broadcast.
+
+The Crunchyroll app is available on over 15 platforms, including all gaming consoles.
+
+Crunchyroll, LLC is an independently operated joint venture between US-based Sony Pictures Entertainment, and Japan’s Aniplex, a subsidiary of Sony Music Entertainment (Japan) Inc., both subsidiaries of Tokyo-based Sony Group Corporation.
+
+
+Automation QA Engineer
+
+Job Description
+
+Mixbook Moldova is seeking an Automation QA Engineer to join our fun and growing world-class team of senior developers in Chișinău! Recognized as the “Best Tech Employer” in 2019 by the Moldovan Government, Mixbook has a strong, collaborative company culture and offers a chance to make a meaningful difference in our customers’ lives. We are a “people-first” organization seeking team players with a high level of emotional intelligence, appreciation for teamwork, and dedication toward building amazing tools for our team and customers alike.
+
+As a QA Engineer on the Mixbook Moldova team, you’ll work in Chișinău with fellow QA engineers, senior devs, and product owners to build a product that will surprise and delight our customers. You will be an active and critical participant in our system design and review processes, scoping, participating, and leading cross-functional projects.
+
+Unlike companies that operate on a specialist model where your project is at risk of being deprioritized or canceled, at Mixbook, you always work on what we need, and you are always engaged with what’s important at any given time. You are never given “busy work” until your project is back on the priority list. Your contribution is always meaningful and highly impactful.
+
+This position is based in Chișinău, Moldova.
+
+What You’ll Do
+
+•	Work closely with product owners, both domestically and internationally, to design, implement and deploy systems to support and scale our growing technical needs while empowering our customers to be creative
+•	Promote strong collaboration within a cross-functional team, including marketing, operations, design, and product management
+•	Prioritize multiple concurrent requests and work with stakeholders to reach acceptable schedules
+•	Actively participate in team development initiatives, trainings, and other events
+•	Work in a people-first environment as a self-motivated, strong team player
+
+What You’ll Need
+
+•	2+ years of experience in Automation Testing of web-based applications, particularly consumer-facing products
+•	Mastery of one or more of the following stacks: Selenium/WebDriver, TypeScript, JavaScript, AWS, SQL
+•	Proficient in designing test plans, writing test scenarios, and translating user acceptance stories into comprehensive positive and negative test cases
+•	Proficient in bug triage, determining the relative importance of each bug, and advocating for the most important fixes
+•	Ability to work well in teams and communicate with non-engineering staff (product owners)
+•	Able to explain how to write and deliver good, detailed test cases to non-QA staff (developers and product owners)
+•	Detail-oriented and able to work independently if needed
+•	Intermediate English speaking skills, level B2 or greater
+•	Bachelor’s Degree in Computer Science or another related college degree is a plus
+
+What You’ll Enjoy
+
+•	Market-leading salary and perks
+•	Being part of a small, efficient, and inspiring engineering team
+•	Unlimited PTO policy and flexible schedule
+•	Personal budget for education and team building
+•	Frequent travel to the United States (subject to relaxation of varying travel restrictions)
+•	High-tech modern office in central Chișinău
+
+Company Mission
+
+Our mission is to empower people to be creative and connect deeply with the ones they love. Unlike most growth companies, we have invested deeply in culture. Organizational health is central to our long-term strategy – we believe that when we love our people, they will love our customers, and our customers will love our business.
+
+We want people to join us who exude our core values:
+
+•	Scrappy (Act like an entrepreneur)
+•	Caring (Heart of empathy)
+•	Craftsmanship (Spirit of excellence)
+
+Automation QA Engineer
+
+
+About the job
+Responsibilities
+
+We are looking for highly motivated Automation QA Engineers, driven by innovation and quality.
+
+We are interested in candidates with drive, initiative, and enthusiasm, who are adaptable and good team players. You can become a part of a dedicated team that delivers products in banking, payments, insurance, health, and others for leading global companies. In this position, you will be using the latest technologies and development methods. As a team, you will ensure that the delivered products are of the highest quality.
+
+This position involves working in a fast-paced agile environment, while interacting with teams in multiple time zones.
+
+Qualifications And Experience
+
+•	2+ years of experience in Software Testing Automation
+•	Have good understanding of Algorithms and Data Structures
+•	Know how to apply OOP in Java or C# (or a different programming language which has a great market exposure)
+•	Feel comfortable working with SQL and different DBMS (Oracle, Microsoft SQL Server)
+•	Have experience testing Web Services (SOAP, REST)
+•	Feel comfortable working with Version Control Systems (Git, SVN)
+•	Know about Build tools (Maven, Ant, Gradle) and Continuous Integration (Jenkins, TeamCity)
+
+Additional Information
+
+•	Dynamic, agile environment
+•	Work in projects for some of the biggest brands worldwide
+•	Discover multiple career development opportunities (coaching, trainings, certifications, conferences)
+•	Get involved in multiple initiatives that drive Technical Excellence
+•	Supportive, friendly, and healthy work environment
+•	English language courses
+•	Private health insurance
+•	Sport membership reimbursement
+•	Fidelity holiday days
+•	Endava referral bonus
+•	Flexible working hours
+
+DevOps Engineer
+
+Devops Engineer, IT
+Discover our exciting job opportunities and start your own adventure at maib!
+The largest bank in Moldova offers new IT positions in different areas that will support Agile Transformation.
+Now we are looking for DevOps Engineers (from Junior to Senior/Expert) for the project of developing mobile bank applications for legal entities and individuals, digital and agile bank’s initiatives. If you love innovating and building digital solutions, join us.
+The first things you will do:
+•	Design and Implementation of cloud Infrastructure on premise and on a variety of Cloud Providers (Azure a preference);
+•	Perform root cause analysis for production issues using Open Source technology;
+•	Build tooling and software to mitigate common problems;
+•	Work with the Development Teams to manage releases of software using CI/CD;
+•	Keep up to date with recent news and developments in the Open Source community;
+•	Ensure all software is configured against modern industry recommendations;
+•	Monitor systems, applications and vulnerabilities to ensure they are healthy and secure;
+•	Responsible for maintaining SLO’s / SLA’s for uptime and performance for the platform;
+•	Ensure security and stability of the platform;
+•	Supporting other teams with DevOps specific skillsets.
+What qualifications you will need:
+•	An understanding of DevOps/SRE methodology;
+•	Container Orchestration via Kubernetes;
+•	Database Technologies, Preferably MS SQL;
+•	Continuous Integration tooling, e.g. GitLab, Jenkins, Team City;
+•	Continuous Deployment tooling e.g. Argo CD;
+•	Cloud Providers, e.g. Azure/GCP/AWS;
+•	Linux System Administration, e.g. RHEL/CentOS;
+•	Scripting, e.g. Bash/Python/Go;
+•	Configuration Management, e.g. Ansible;
+•	Infrastructure Management, e.g. Terraform;
+•	Monitoring, e.g. Prometheus, Grafana, Graphite;
+•	Log aggregation, e.g. ELK, Splunk, Greylog.
+What abilities you will live:
+•	Open minded and self-driver;
+•	Oriented to the results and strong organized;
+•	Effective communication skills, self-confidence and good team player;
+•	bility to understand business requirements and translate them into technical requirements;
+•	Attentive to the details, flexible and collaborative.
+What we offer:
+
+• Flexibility: Hybrid, remote or in the office work;
+• Competitive salary and benefits as we are the first bank in Agile Transformation;
+• Lunch tickets, preferred loans and corporate number;
+• A huge range of additional discounts for different brands;
+• Great opportunities to have autonomy in your position, to enjoy professional life together with our IT team and to be THE key contributor in building an agile bank.
+You are more than welcome to send the application or CV to resurseumane@maib.md and one of our recruiter will contact you in the nearest time. ))
+You can be the one to bring the Agile culture to the maib!
+Scrum Master
+
+Responsibilities
+
+•	Help the team(s) focus on creating high-value Increments that meet the Common Definition of Done
+•	Ensure predictability of the product delivery
+•	Help agile team(s), and direct stakeholders understand the agile way of working
+•	Manage risks proactively and identify relevant risk management strategies
+•	Creating an environment for healthy interactions
+•	Help people get better at collaborating, deliver more value, resolve a conflict or problem
+•	Facilitate team(s) events as needed: make clear the Purpose and Outcomes, design the meeting flow to support desired outcomes, facilitate full participation
+•	Drive team(s) retrospective sessions, and other ceremonies, and ensures that improvements actions are captured, and acted upon
+•	Support and help the Product Owners in their efforts to manage the backlog and guide the team while facilitating a healthy team dynamic to priorities and scope
+•	Make visible or provide input for the product progress
+•	Identify, assess, and manage risks, impediments, and dependencies which might impact the success of the product delivery
+
+
+Qualifications And Experience
+
+•	2+ years of experience working in Scrum Master role or Agile PM
+•	Excellent understanding of the software development process
+•	Excellent understanding of Agile delivery principles and frameworks like Scrum, Kanban, XP
+•	Experience in applying a wide variety of patterns, and techniques to assess sprint, backlog, and team health
+•	Passionate about continuous improvement
+•	Communicates fluently, orally and in writing in English, and can present complex information to both technical and non-technical audiences
+
+
+Desirable:
+
+•	Agile certifications: Professional Scrum Master (PSM I, PSMII), Certified Scrum Master (CSM), or other leading Agile certification,
+•	PMP certifications,
+•	Familiar with scaled Agile frameworks (e.g. SAFe, LeSS).
+
+Benefits:
+
+•	International exposure, working with colleagues and customers across different countries
+•	Get experience in different business areas (Finance, Digital Media, Insurance, Telecom, Payment, Banking, etc.)
+•	Trainings/certifications and career development
+•	Access to corporate library and online learning tools
+•	Endava referral bonus
+•	Additional Health insurance, sport compensation, flexible work hours, loyalty programs, English courses
+Senior Business Analyst
+
+Responsibilities
+
+We are looking for talented colleagues to join the Analysis team. The role operates using agile methodology delivering timely and effective solutions
+
+•	Independently work with customers to understand their problems and needs
+•	Identify and manage project stakeholders and align different visions and interest
+•	Interact with stakeholders and SMEs to find opportunities for improvement
+•	Understand and contribute to product vision and business goals
+•	Elicit and analyze various type of requirements using a range of analysis techniques
+•	Document and validate the requirements considering business needs and project context
+•	Understand and advise the customer on different prioritization techniques
+•	Help the customer to define the minimum viable product and future roadmap
+•	Refine product requirements incrementally with a focus on Business Value
+•	Collaborate with Architecture and development to ensure alignment to requirements and priorities
+•	Collaborate with Test on writing the test scenarios and validating the solution
+•	Support the team with requirements clarifications throughout development
+•	Help the team with delivering the solution in production and transitioning into support
+•	Review / analyze the achievement of defined project objectives and benefits
+
+
+Qualifications And Experience
+
+•	3+ years active experience in IT
+•	3+ years active experience as Business/System Analyst
+•	Good knowledge of business analysis practices, techniques
+•	Good understanding of different Software Development Life Cycle models
+•	Experience in working directly with customers and development teams
+•	Analytical thinking and critical thinking
+•	Attention to detail and accuracy
+•	Good written skills in English, including technical writing
+•	Good verbal communication skills in English
+•	High autonomy and ability to take initiative
+•	High commitment to continuous self-improvement and learning
+•	Effective communication and negotiation with different types of stakeholders
+•	Ability to travel on short term basis
+•	Good team player
+BI Engineer
+
+Responsibilities
+
+•	Designs, codes, tests, corrects, and documents simple programs and assists in the implementation of software which forms part of a properly engineered information or communications system
+•	Work along with the other members of Data team to define the data processing and validation flow or dashboards
+•	Design and develop data flows to support large data sets and meet business requirements
+•	Build processes which support data transformation, using different data structures, metadata, or other dependencies
+•	Propose and develops solutions for the Relational and Dimensional Model based on the technical and business requirements
+•	Implement or optimize solutions based on the requirements, for both on premise and in Cloud services
+•	Monitor and maintain the data flows in optimal condition
+•	Propose solutions that can improve the data flows by automation of manual processes, data validation etc.
+
+
+Qualifications And Experience
+
+•	Able to interpret and validate data models
+•	Has the ability to work with structured or unstructured data
+•	Strong analytic skills and good Data visualization technics
+•	2+ years’ experience within Data related projects (Oracle suite products), prevailing Data migration and Service integration or ERP related
+•	RDBMS: Oracle/MS SQL
+•	Good knowledge of Datawarehouse and Data Lakes concepts and system architecture
+•	Procedural and functional DB development: PL/SQL, shell
+•	Data flow integration tools: ODI
+•	Data flow analyses and visualization: OBIEE, Power BI
+•	Code versioning: Git / Bitbucket / Liquibase
+•	Performance tunning
+QA manual testing
+Căutăm QA pasionat cu standarde ridicate în ceea ce privește angajamentul, experiența clienților și livrarea de produse de calitate.
+Responsabilități:
+•	Revizuirea și analiza specificațiilor sistemului
+•	Dezvoltarea strategii eficiente și planuri de testare
+•	Executarea cazurilor de testare manuală și analiza rezultatelor
+•	Testarea serviciilor web, aplicațiilor mobile;
+•	Înregistrarea detaliată a erorilor
+De asemenea, se consideră un avantaj:
+•	Spirit distractiv și entuziast;
+•	Bune abilități de comunicare;
+•	Rezolvarea problemelor și atitudine orientată spre rezultate;
+•	Capacitatea de a stabili priorități și de a-și îndeplini angajamentele;
+•	Creativitate și abilități de auto-învățare;
+•	Experiență de lucru în echipă;
+Beneficii:
+•	Salariu motivant
+•	Perioada de instruire, cursuri și certificare;
+•	Posibilitatea de a lucra de acasă parțial;
+•	Mediu de lucru modern, dinamic și plăcut.
+

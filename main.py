@@ -38,9 +38,13 @@ class MyBot(telebot.TeleBot):
         super().__init__(*args, **kwargs)
         self.telegram_client = telegram_client
         self.user_actioner = user_actioner
+        self.mode = None
 
     def setup_resources(self):
         self.user_actioner.setup()
+
+    def setup_mode(self, mode: str):
+        self.mode = mode
 
     def shutdown_resources(self):
         self.user_actioner.shutdown()
@@ -97,7 +101,39 @@ def say_speech(message: Message):
     bot.user_actioner.update_last_date(user_id=message.from_user.id, last_date=date.today())
     bot.send_message(message.from_user.id, text='Дoбрый день. Я Vitalii_bot. Назовите ваше имя')
     bot.register_next_step_handler(message, callback=handle_messages)
+    bot.setup_mode('say_speech')
 
+def send_respond_vacancies(message: Message):
+    # бот отсылает вопрос в ChatGpt API и полученный ответ пишет в чат
+    with open('datasets_vacancies_requirements.txt', 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+        max_caracters = 10000
+        for i in range(len(', '.join(lines)) // max_caracters + 1):
+            text = ''.join(lines)[i * max_caracters:(i + 1) * max_caracters]
+            bot.send_message(message.from_user.id, OpenAIWrapper().get_answer(
+                f"Найди в тексте ниже информацию и сообщи мне как в тексте {message.text} \n \n {text}"))
+
+
+@bot.message_handler(commands=['vacancies'])
+def lets_chat(message: Message):
+    bot.send_message(message.from_user.id, text='Задай мне вопрос о вакансиях и требованиям к ним')
+    bot.register_next_step_handler(message, callback=send_respond_vacancies)
+    bot.setup_mode('vacancies')
+
+def send_respond_movies(message: Message):
+    # бот отсылает вопрос в ChatGpt API и полученный ответ пишет в чат
+    with open('dataset_movies.txt', 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+        text = ''.join(lines)
+        bot.send_message(message.from_user.id, OpenAIWrapper().get_answer(
+            f"Найди в тексте ниже информацию и сообщи мне без изменений {message.text} \n \n {text}"))
+
+
+@bot.message_handler(commands=['movies'])
+def lets_chat(message: Message):
+    bot.send_message(message.from_user.id, text='Задай мне вопрос о фильмах 2022 года')
+    bot.register_next_step_handler(message, callback=send_respond_movies)
+    bot.setup_mode('movies')
 
 def send_respond(message: Message):
     # бот отсылает вопрос в ChatGpt API и полученный ответ пишет в чат
@@ -105,17 +141,21 @@ def send_respond(message: Message):
     response = openAIWrapper.get_answer(message.text)
     bot.send_message(message.from_user.id, text=response)
 
-
 @bot.message_handler(commands=['lets_chat'])
 def lets_chat(message: Message):
     bot.send_message(message.from_user.id, text='Задай мне вопрос на любую тему')
     bot.register_next_step_handler(message, callback=send_respond)
+    bot.setup_mode('lets_chat')
 
 # бот отвечает на любое сообщение в чате, кроме указанных выше команд
 @bot.message_handler(func=lambda message: True)
 def echo_all(message: Message):
-    bot.send_message(message.from_user.id, OpenAIWrapper().get_answer(message.text))
 
+    if bot.mode == 'vacancies':
+        send_respond_vacancies(message)
+
+    elif bot.mode == 'movies':
+          send_respond_movies(message)
 
 def create_error_message(err: Exception) -> str:
     return f'Error: {datetime.now()} ::: {err.__class__}: {err}'

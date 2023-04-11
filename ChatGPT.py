@@ -13,8 +13,8 @@ class OpenAIWrapper:
 
     def __init__(self):
         self.model = "text-davinci-003"
-        self.temperature = 0.9
-        self.max_tokens = 256
+        self.temperature = 0.7
+        self.max_tokens = 1000
         self.top_p = 1.0
         self.frequency_penalty = 0.0
         self.presence_penalty = 0.6
