@@ -66,7 +66,7 @@ class PostgresClient:  # класс для универсальной работ
 # UserActioner - класс для работы с таблицей users. Создание таблицы, добавление пользователя, получение пользователя, обновление даты последнего обновления.
 class UserActioner:
     CREATE_USER = """
-        INSERT INTO users (user_id, username, chat_id) VALUES (%s, %s, %s)
+        INSERT INTO users (user_id, username, chat_id, phone) VALUES (%s, %s, %s, %s)
         """
     GET_USER = """
         SELECT * FROM users WHERE user_id = %s
@@ -84,13 +84,15 @@ class UserActioner:
     def shutdown(self):
         self.db_client.close_connection()
 
-    def create_user(self, user_id: int, username: str, chat_id: int):
+    def create_user(self, user_id: int, username: str, chat_id: int, phone: str):
         self.create_table_users()
-        self.db_client.execute_command(command=self.CREATE_USER, params=(user_id, username, chat_id))
+        self.db_client.execute_command(command=self.CREATE_USER, params=(user_id, username, chat_id, phone))
 
     def get_user(self, user_id: int):
         self.create_table_users()
         user = self.db_client.execute_select_command(self.GET_USER % user_id)
+        # здесь проверяем, что найденный юзер не пустой, и если он не пустой, то присутствует ли он в белом списке
+
         return user[0] if user else []
 
     def update_last_date(self, user_id: int, last_date: date):
@@ -103,6 +105,7 @@ class UserActioner:
                user_id int Primary Key,
                username text,
                chat_id int,
+               phone text,
                last_date_date date
             )'''
             self.db_client.execute_command(command=create_table_users)
