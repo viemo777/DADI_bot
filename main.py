@@ -68,40 +68,40 @@ def verify_user(message: Message):
     username = message.from_user.username
     chat_id = message.chat.id
 
-    with open('whitelist_phone_numbers.txt', 'r') as file:
-        # read all content of a file
-        content = file.read()
-
-    user = bot.user_actioner.get_user(user_id=user_id)
-
-    if not user:
-        print('verify_user1')
-
-        keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)  # Connect the keyboard
-        button_phone = types.KeyboardButton(text="Отправь свой номер",
-                                            request_contact=True)  # Specify the name of the button that the user will see
-        keyboard.add(button_phone)  # Add this button
-        bot.send_message(message.from_user.id,
-                         text=f'Это закрытый бот. Необходима проверка по номеру телефона: {username}. '
-                              f'Ваш ID: {user_id}. '
-                              f'Для проверки права доступа к боту воспользуйтесь функцией "Отправь '
-                              f'свой номер".'
-                         , reply_markup=keyboard)
-    elif user and user[4] and user[4] in content:
-        print('verify_user2')
-        # бот отвечает в чате на команду /start
-        bot.reply_to(message=message, text=f'Вы уже зарегистрированы: {username}. '
-                                           f'Ваш ID: {user_id}')
-        return True
-
-    else:  # когда user есть в базе, но его номер телефона не в белом списке
-        print('verify_user3')
-        # бот отвечает в чате на команду /start
-        bot.reply_to(message=message,
-                     text=f'У Вас нет права доступа к этому боту. Обратитесь к HR менеджеру Вашей организации. '
-                          f'Ваш ID: {user_id}')
-    # конец работа с БД
-
+    # with open('whitelist_phone_numbers.txt', 'r') as file:
+    #     # read all content of a file
+    #     content = file.read()
+    #
+    # user = bot.user_actioner.get_user(user_id=user_id)
+    #
+    # if not user:
+    #     print('verify_user1')
+    #
+    #     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)  # Connect the keyboard
+    #     button_phone = types.KeyboardButton(text="Отправь свой номер",
+    #                                         request_contact=True)  # Specify the name of the button that the user will see
+    #     keyboard.add(button_phone)  # Add this button
+    #     bot.send_message(message.from_user.id,
+    #                      text=f'Это закрытый бот. Необходима проверка по номеру телефона: {username}. '
+    #                           f'Ваш ID: {user_id}. '
+    #                           f'Для проверки права доступа к боту воспользуйтесь функцией "Отправь '
+    #                           f'свой номер".'
+    #                      , reply_markup=keyboard)
+    # elif user and user[4] and user[4] in content:
+    #     print('verify_user2')
+    #     # бот отвечает в чате на команду /start
+    #     bot.reply_to(message=message, text=f'Вы уже зарегистрированы: {username}. '
+    #                                        f'Ваш ID: {user_id}')
+    #     return True
+    #
+    # else:  # когда user есть в базе, но его номер телефона не в белом списке
+    #     print('verify_user3')
+    #     # бот отвечает в чате на команду /start
+    #     bot.reply_to(message=message,
+    #                  text=f'У Вас нет права доступа к этому боту. Обратитесь к HR менеджеру Вашей организации. '
+    #                       f'Ваш ID: {user_id}')
+    # # конец работа с БД
+    #
     return False
 
 
@@ -284,6 +284,7 @@ while True:
     try:
         bot.setup_resources()
         bot.polling()
+        print('restart bot')
     # inform admin about error
     except JSONDecodeError as err:
         # секция работы с логгированием
