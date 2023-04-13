@@ -57,8 +57,11 @@ class MyBot(telebot.TeleBot):
 telegram_client = TelegramClient(token=TOKEN, base_url='https://api.telegram.org/bot')
 user_actioner = UserActioner(db_client=postgres_client)
 bot = MyBot(token=TOKEN, telegram_client=telegram_client, user_actioner=user_actioner)
+print('bot created')
+
 
 def verify_user(message: Message):
+    print('verify_user')
     # работа с БД Postgres
     # регистрируются только пользователи, если они отправили номер телефона и этот номер есть в белом списке
     user_id = message.from_user.id
@@ -72,6 +75,7 @@ def verify_user(message: Message):
     user = bot.user_actioner.get_user(user_id=user_id)
 
     if not user:
+        print('verify_user1')
 
         keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)  # Connect the keyboard
         button_phone = types.KeyboardButton(text="Отправь свой номер",
@@ -84,12 +88,14 @@ def verify_user(message: Message):
                               f'свой номер".'
                          , reply_markup=keyboard)
     elif user and user[4] and user[4] in content:
+        print('verify_user2')
         # бот отвечает в чате на команду /start
         bot.reply_to(message=message, text=f'Вы уже зарегистрированы: {username}. '
                                            f'Ваш ID: {user_id}')
         return True
 
     else:  # когда user есть в базе, но его номер телефона не в белом списке
+        print('verify_user3')
         # бот отвечает в чате на команду /start
         bot.reply_to(message=message,
                      text=f'У Вас нет права доступа к этому боту. Обратитесь к HR менеджеру Вашей организации. '
@@ -98,8 +104,10 @@ def verify_user(message: Message):
 
     return False
 
+
 @bot.message_handler(commands=['start'])
 def start(message: Message):
+    print('handle_start')
     # Секция для записи новых пользователей в json файл.
     # Записывается любой пользователь, кто вошел в бот
     with open('users.json', 'r') as f:
@@ -116,26 +124,27 @@ def start(message: Message):
 
     verify_user(message=message)
 
-def handle_messages(message: Message):
 
+def handle_messages(message: Message):
+    print('report')
     # бот отвечает в чате на команду /report
     bot.reply_to(message=message, text=f'У тебя красивое имя, {message.text}!')
-    print(1)
 
 
 @bot.message_handler(commands=['report'])
 def report(message: Message):
-    if verify_user(message=message):
+    print('handle_report')
+    if not verify_user(message=message):
         exit()
 
     bot.user_actioner.update_last_date(user_id=message.from_user.id, last_date=date.today())
-    bot.send_message(message.from_user.id, text='Дoбрый день. Я Vitalii_bot. Назовите ваше имя')
+    bot.send_message(message.from_user.id, text='Дoбрый день. Я бот системы Доктрина. Представьтесь, пож-та')
     bot.register_next_step_handler(message, callback=handle_messages)
     bot.setup_mode('report')
-    print(2)
 
 
 def send_respond_vacancies(message: Message):
+    print('send_respond_vacancies')
     # бот отсылает вопрос в ChatGpt API и полученный ответ пишет в чат
     with open('datasets_vacancies_requirements.txt', 'r', encoding='utf-8') as f:
         lines = f.readlines()
@@ -144,21 +153,21 @@ def send_respond_vacancies(message: Message):
             text = ''.join(lines)[i * max_caracters:(i + 1) * max_caracters]
             bot.send_message(message.from_user.id, OpenAIWrapper().get_answer(
                 f"Найди в тексте ниже информацию о {message.text} \n \n {text}"))
-        print(3)
 
 
 @bot.message_handler(commands=['vacancies'])
 def lets_chat(message: Message):
-    if verify_user(message=message):
+    print('handle_vacancies')
+    if not verify_user(message=message):
         exit()
 
     bot.send_message(message.from_user.id, text='Задай мне вопрос о вакансиях и требованиям к ним')
     bot.register_next_step_handler(message, callback=send_respond_vacancies)
     bot.setup_mode('vacancies')
-    print(4)
 
 
 def send_respond_movies(message: Message):
+    print('send_respond_movies')
     # бот отсылает вопрос в ChatGpt API и полученный ответ пишет в чат
     try:
         with open('dataset_movies.txt', 'r', encoding='utf-8') as f:
@@ -166,46 +175,45 @@ def send_respond_movies(message: Message):
             text = ''.join(lines)
             bot.send_message(message.from_user.id, OpenAIWrapper().get_answer(
                 f"Найди в тексте ниже информацию о {message.text} \n \n {text}"))
-            print(5)
+
     except Exception as e:
         bot.send_message(message.from_user.id, f"В моей базе нет такой информацию. Изменить запрос")
 
 
 @bot.message_handler(commands=['movies'])
 def lets_chat(message: Message):
-
-    if verify_user(message=message):
+    print('handle_movies')
+    if not verify_user(message=message):
         exit()
 
     bot.send_message(message.from_user.id, text='Задай мне вопрос о фильмах 2022 года')
     bot.register_next_step_handler(message, callback=send_respond_movies)
     bot.setup_mode('movies')
-    print(6)
 
 
 def send_respond(message: Message):
+    print('send_respond_lets_chat')
     # бот отсылает вопрос в ChatGpt API и полученный ответ пишет в чат
     openAIWrapper = OpenAIWrapper()
     response = openAIWrapper.get_answer(message.text)
     bot.send_message(message.from_user.id, text=response)
-    print(7)
 
 
 @bot.message_handler(commands=['lets_chat'])
 def lets_chat(message: Message):
-
-    if verify_user(message=message):
+    print('handle_lets_chat')
+    if not verify_user(message=message):
         exit()
 
     bot.send_message(message.from_user.id, text='Задай мне вопрос на любую тему')
     bot.register_next_step_handler(message, callback=send_respond)
     bot.setup_mode('lets_chat')
-    print(8)
 
 
 # секция для запроса у пользователя номера телефона
 @bot.message_handler(commands=['number'])  # Announced a branch to work on the <strong> number </strong> command
 def phone(message):
+    print('handle_number')
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)  # Connect the keyboard
     button_phone = types.KeyboardButton(text="Отправь свой номер",
                                         request_contact=True)  # Specify the name of the button that the user will see
@@ -213,12 +221,18 @@ def phone(message):
     bot.send_message(message.chat.id, 'Отправьте свой номер телефона для проверки права доступа к боту',
                      reply_markup=keyboard)  # Duplicate with a message that the user will now send his phone number to the bot (just in case, but this is not necessary)
 
-    print(10)
+
+# управление видимостью кнопок клавиатуры, зависит от прав пользователя
+def change_keyboard_buttons(message: Message, text: str):
+    print('change_keyboard_buttons')
+    a = types.ReplyKeyboardRemove()
+    bot.send_message(message.from_user.id, text, reply_markup=a)
 
 
 @bot.message_handler(content_types=[
     'contact'])  # Announced a branch in which we prescribe logic in case the user decides to send a phone number :)
 def contact(message):
+    print('handle_contact')
     if message.contact is not None:  # If the sent object <strong> contact </strong> is not zero
 
         # hire you must verify the phone number in white list phone numbers
@@ -236,15 +250,11 @@ def contact(message):
             create_new_user = bot.user_actioner.create_user(user_id=user_id, username=username, chat_id=chat_id,
                                                             phone=message.contact.phone_number)
 
-            bot.send_message(message.chat.id, 'Ваш номер телефона принят. Добро пожаловать в бота Vitalii_bot.')
-
+            # bot.send_message(message.chat.id, 'Ваш номер телефона принят. Добро пожаловать в бота Доктрина.')
+            change_keyboard_buttons(message, 'Ваш номер телефона принят. Добро пожаловать в бота Доктрина.')
         else:
-            bot.send_message(message.chat.id, 'Ваш номер телефона не принят. Доступ к боту запрещен.')
-
-        a = types.ReplyKeyboardRemove()
-        bot.send_message(message.from_user.id, 'Что', reply_markup=a)
-
-    print(11)
+            # bot.send_message(message.chat.id, 'Ваш номер телефона не принят. Доступ к боту запрещен.')
+            change_keyboard_buttons(message, 'Ваш номер телефона не принят. Доступ к боту запрещен.')
 
 
 # конец секции для запроса у пользователя номера телефона
@@ -252,6 +262,9 @@ def contact(message):
 # бот отвечает на любое сообщение в чате, кроме указанных выше команд
 @bot.message_handler(func=lambda message: True)
 def echo_all(message: Message):
+    if not verify_user(message=message):
+        exit()
+
     print(9)
     if bot.mode == 'vacancies':
         send_respond_vacancies(message)
