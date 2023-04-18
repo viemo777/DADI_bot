@@ -106,8 +106,8 @@ def echo_all(message: Message):
     elif bot.mode == 'say_speech':
 
         send_respond_from_gpt(message)
-    elif bot.mode.startwith() == 'Training':
-
+    elif message.text.startswith("/Training"):
+        send_respond_training(message)
     else:
         pass
 
@@ -119,21 +119,27 @@ def menu_keyboard_manager(message: Message = None, menu=1):
         print("training_list_menu")
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 1
-        # markup.add(types.InlineKeyboardButton("Инструкция по технике безопасности на \nрабочем месте от 22.03.2023", callback_data="training_1"),
-        #            types.InlineKeyboardButton("Регламент процесса 'Приемка работ по ре\nмонту сетей и оборудования'", callback_data="training_2"),
-        #            types.InlineKeyboardButton("Приказ о соблюдении мер для профилактики\n коронавируса", callback_data="training_3"),
+        # markup.add(types.InlineKeyboardButton("Инструкция по технике безопасности н", callback_data="training_1"),
+        #            types.InlineKeyboardButton("Регламент процесса 'Приемка работ по '", callback_data="training_2"),
+        #            types.InlineKeyboardButton("Приказ о соблюдении мер для профилакт", callback_data="training_3"),
         #            types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
         #  bot.send_message(message.chat.id, "Cписок ваших незавершенных тренингов /DSA. \n"
         #                                   "Для продолжения выберите тренинг:", reply_markup=markup)
         #            types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
         bot.send_message(message.chat.id, text="🧮 Cписок ваших незавершенных тренингов. \n"
                                                "Для продолжения выберите тренинг:")
+
+        # запрашиваем список тренингов из БД. Обрабатываем в цикле и формируем сообщения. Оформляем одинаковой ширины
+        text1 = "Инструкция по технике безопасности на рабочем месте от 22.03.2023"
         bot.send_message(message.chat.id,
-                         text="🔍 Регламент процесса 'Приемка работ по ре\nмонту сетей и оборудования \n /Training32182384")
+                         text=f"🔍 {''.join([text1[x*20:(x+1)*20] for x in range(len(text1)//20+1)])} \n/Training32182384")
+
+        text1 = "Методология организации процесса Приемка работ по ремонту сетей и оборудования"
         bot.send_message(message.chat.id,
-                         text="🔍 Инструкция по технике безопасности на \nрабочем месте от 22.03.2023 \n /Training45234")
+                         text=f"🔍 {''.join([text1[x*20:(x+1)*20] for x in range(len(text1)//20+1)])} \n/Training45234")
+        text1 = "Приказ о соблюдении мер для профилактики коронавируса"
         bot.send_message(message.chat.id,
-                         text="🔍 Приказ о соблюдении мер для профилактики\n коронавируса \n /Training2342344")
+                         text=f"🔍 {''.join([text1[x*20:(x+1)*20] for x in range(len(text1)//20+1)])} \n/Training2342344")
 
     if menu == "my_results":
         print("my_results_menu")
@@ -418,6 +424,13 @@ def movies(message: Message):
     bot.send_message(message.from_user.id, text='Задай мне вопрос о фильмах 2022 года')
     bot.register_next_step_handler(message, callback=send_respond_movies)
     bot.setup_mode('movies')
+
+
+def send_respond_training(message: Message):
+    print('send_respond_training')
+    # найти тренинг по ID в списке и запросить список вопросов
+    bot.send_message(message.from_user.id, text=f'Вопрос: текст вопроса \n'
+                                                f'Выберите варианты правильных ответов: {message.text}')
 
 
 def send_respond_from_gpt(message: Message):
