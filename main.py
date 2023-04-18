@@ -112,40 +112,57 @@ def echo_all(message: Message):
         pass
 
 
+def create_list_of_trainings(message: Message) -> list:
+    print(15)
+
+    # запрашиваем список тренингов из БД по Пользователю message.from_user.id. Обрабатываем в цикле и формируем сообщения. Оформляем одинаковой ширины
+    list_of_trainings = [{'text': 'Инструкция по технике безопасности на рабочем месте от 22.03.2023',
+                    'training_id': 'Training32182384'},
+                    {'text': 'Методология организации процесса Приемка работ по ремонту сетей и оборудования',
+                    'training_id': 'Training45234'},
+                    {'text': 'Приказ о соблюдении мер для профилактики коронавируса',
+                     'training_id': 'Training2342344'}]
+    number_per_row = 40
+
+    for x in range(len(list_of_trainings)):
+        text = list_of_trainings[x]['text']
+        list_of_trainings[x]['text'] = '\n    '.join([text[x * number_per_row:(x + 1) * number_per_row] for x in range(len(text) // number_per_row + 1)])
+
+    return list_of_trainings
+
+
 def menu_keyboard_manager(message: Message = None, menu=1):
     print(14)
+    print('здесь проверять права пользоваиеляб как и в verify_user')
 
     if menu == "training_list":
         print("training_list_menu")
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 1
-        # markup.add(types.InlineKeyboardButton("Инструкция по технике безопасности н", callback_data="training_1"),
-        #            types.InlineKeyboardButton("Регламент процесса 'Приемка работ по '", callback_data="training_2"),
-        #            types.InlineKeyboardButton("Приказ о соблюдении мер для профилакт", callback_data="training_3"),
-        #            types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
-        #  bot.send_message(message.chat.id, "Cписок ваших незавершенных тренингов /DSA. \n"
-        #                                   "Для продолжения выберите тренинг:", reply_markup=markup)
-        #            types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
-        bot.send_message(message.chat.id, text="🧮 Cписок ваших незавершенных тренингов. \n"
-                                               "Для продолжения выберите тренинг:")
 
-        # запрашиваем список тренингов из БД. Обрабатываем в цикле и формируем сообщения. Оформляем одинаковой ширины
-        text1 = "Инструкция по технике безопасности на рабочем месте от 22.03.2023"
-        bot.send_message(message.chat.id,
-                         text=f"🔍 {''.join([text1[x*20:(x+1)*20] for x in range(len(text1)//20+1)])} \n/Training32182384")
 
-        text1 = "Методология организации процесса Приемка работ по ремонту сетей и оборудования"
-        bot.send_message(message.chat.id,
-                         text=f"🔍 {''.join([text1[x*20:(x+1)*20] for x in range(len(text1)//20+1)])} \n/Training45234")
-        text1 = "Приказ о соблюдении мер для профилактики коронавируса"
-        bot.send_message(message.chat.id,
-                         text=f"🔍 {''.join([text1[x*20:(x+1)*20] for x in range(len(text1)//20+1)])} \n/Training2342344")
+        list_of_trainings = create_list_of_trainings(message=message)
+        # for training in list_of_trainings:
+        #     bot.send_message(message.chat.id,
+        #                  text=f"🔍 {training['text']} \n/{training['training_id']}")
+        #
+        #
+        # markup.add(types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
+        # bot.send_message(message.chat.id, "Возврат в главное меню", reply_markup=markup)
+        text = "🧮 Cписок ваших незавершенных тренингов. \n    Для продолжения выберите тренинг:\n\n"
+        for training in list_of_trainings:
+            text = text + f"🔍 {training['text']} \n    /{training['training_id']}\n\n"
+        markup.add(types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
 
-    if menu == "my_results":
+        bot.send_message(message.chat.id,
+                         text=text, reply_markup=markup)
+
+
+    elif menu == "my_results":
         print("my_results_menu")
         bot.send_message(message.chat.id, "Ваш коэффициент эффективности за текущий месяц = 0,96. \n"
                                           "Ваша эффективность выше среднего по компании на 4% \n"
-                                          "Количество пройденных тренингов за текущий месяц = 3. \n"
+                                            "Количество пройденных тренингов за текущий месяц = 3. \n"
                                           "Количество непройденных тренингов = 5. \n")
 
         markup = types.InlineKeyboardMarkup()
@@ -297,7 +314,7 @@ def verify_user(message: Message, from_start=False):
     # регистрируются только пользователи, если они отправили номер телефона и этот номер есть в белом списке
     user_id = message.from_user.id
     username = message.from_user.username
-    chat_id = message.chat.id
+#    chat_id = message.chat.id
 
     with open('whitelist_phone_numbers.txt', 'r') as file:
         # read all content of a file
@@ -338,6 +355,7 @@ def verify_user(message: Message, from_start=False):
 @bot.callback_query_handler(func=lambda call: True)
 def handle_query(call):
     print(call.data)
+    print("здесь проверять доспупы юзthf как verify_user")
 
     if call.data == "training_list":
         bot.answer_callback_query(callback_query_id=call.id,
