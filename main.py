@@ -9,7 +9,6 @@ from datetime import datetime, date
 from json import JSONDecodeError
 from logging import StreamHandler, getLogger
 
-import redis as redis
 import telebot
 from envparse import Env
 from telebot.types import Message
@@ -107,22 +106,37 @@ def echo_all(message: Message):
     elif bot.mode == 'say_speech':
 
         send_respond_from_gpt(message)
+    elif bot.mode.startwith() == 'Training':
+
     else:
         pass
 
 
-def menu_keyboard_manager(message: Message = None, menu = 1):
+def menu_keyboard_manager(message: Message = None, menu=1):
     print(14)
 
     if menu == "training_list":
+        print("training_list_menu")
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 1
-        markup.add(types.InlineKeyboardButton("Тренинг 1", callback_data="training_1"),
-                   types.InlineKeyboardButton("Тренинг 2", callback_data="training_2"),
-                   types.InlineKeyboardButton("Тренинг 3", callback_data="training_3"))
-        bot.send_message(message.chat.id, "Ниже представлен список ваших незавершенных тренингов. \n"
-                                          "Для прохождения выберите любой", reply_markup=markup)
+        # markup.add(types.InlineKeyboardButton("Инструкция по технике безопасности на \nрабочем месте от 22.03.2023", callback_data="training_1"),
+        #            types.InlineKeyboardButton("Регламент процесса 'Приемка работ по ре\nмонту сетей и оборудования'", callback_data="training_2"),
+        #            types.InlineKeyboardButton("Приказ о соблюдении мер для профилактики\n коронавируса", callback_data="training_3"),
+        #            types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
+        #  bot.send_message(message.chat.id, "Cписок ваших незавершенных тренингов /DSA. \n"
+        #                                   "Для продолжения выберите тренинг:", reply_markup=markup)
+        #            types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
+        bot.send_message(message.chat.id, text="🧮 Cписок ваших незавершенных тренингов. \n"
+                                               "Для продолжения выберите тренинг:")
+        bot.send_message(message.chat.id,
+                         text="🔍 Регламент процесса 'Приемка работ по ре\nмонту сетей и оборудования \n /Training32182384")
+        bot.send_message(message.chat.id,
+                         text="🔍 Инструкция по технике безопасности на \nрабочем месте от 22.03.2023 \n /Training45234")
+        bot.send_message(message.chat.id,
+                         text="🔍 Приказ о соблюдении мер для профилактики\n коронавируса \n /Training2342344")
+
     if menu == "my_results":
+        print("my_results_menu")
         bot.send_message(message.chat.id, "Ваш коэффициент эффективности за текущий месяц = 0,96. \n"
                                           "Ваша эффективность выше среднего по компании на 4% \n"
                                           "Количество пройденных тренингов за текущий месяц = 3. \n"
@@ -130,23 +144,25 @@ def menu_keyboard_manager(message: Message = None, menu = 1):
 
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 2
-        markup.add(types.InlineKeyboardButton("Меню", callback_data="main_menu"),
-                   types.InlineKeyboardButton("Мои тренинги", callback_data="my_trainings"))
-        bot.send_message(message.chat.id, "Выберите следующее действие", reply_markup=markup)
+        markup.add(types.InlineKeyboardButton("📲 Меню", callback_data="main_menu"),
+                   types.InlineKeyboardButton("🥇 Мои тренинги", callback_data="training_list"))
+        bot.send_message(message.chat.id, "Выберите следующее действие:", reply_markup=markup)
     elif menu == "main_menu":
+        print("main_menu_menu")
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 2
         markup.add(types.InlineKeyboardButton("👨‍🏫 Мои тренинги", callback_data="training_list"),
                    types.InlineKeyboardButton("🥇 Мои результаты", callback_data="my_results"),
                    types.InlineKeyboardButton("🌐 Открыть в WEB", url="https://www.google.com/"))
-        bot.send_message(message.chat.id, "Выберите действие", reply_markup=markup)
+        bot.send_message(message.chat.id, "Главное меню. \n"
+                                          "Выберите следующее действие:", reply_markup=markup)
 
     elif menu == 10:
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 2
         markup.add(types.InlineKeyboardButton("Yes", callback_data="cb_yes"),
                    types.InlineKeyboardButton("No", callback_data="cb_no"))
-        bot.send_message(message.chat.id, "Выберите действие", reply_markup=markup)
+        bot.send_message(message.chat.id, "Выберите следующее действие:", reply_markup=markup)
     elif menu == 2:
         id = message.text.replace("/send ", "")
         markup = types.InlineKeyboardMarkup()
@@ -155,7 +171,7 @@ def menu_keyboard_manager(message: Message = None, menu = 1):
         markup.add(types.InlineKeyboardButton('Photo', callback_data='photo'),
                    types.InlineKeyboardButton('Video', callback_data='video'))
         markup.add(types.InlineKeyboardButton('Audio', callback_data='Audio'))
-     #   redis.hset('file_id', message.chat.id, '{}'.format(id))
+        #   redis.hset('file_id', message.chat.id, '{}'.format(id))
         bot.send_message(message.chat.id, 'Select _One_ of these `Items.:D` \n\n (Note: GIFs are Documents)',
                          reply_markup=markup, parse_mode="Markdown")
     elif menu == 3:
@@ -168,24 +184,26 @@ def menu_keyboard_manager(message: Message = None, menu = 1):
         oo = types.InlineKeyboardButton("Channel", url='https://telegram.me/offlineteam')
         markup.add(nn, oo)
         id = message.from_user.id
-        #redis.sadd('memberspy', id)
+        # redis.sadd('memberspy', id)
         bot.send_message(cid, "Hi \n\n Welcome To TweenRoBOT \n\n Please Choose One :)", disable_notification=True,
                          reply_markup=markup)
 
     elif menu == 4:
         bot.send_chat_action(message.chat.id, 'typing')
         markup = types.InlineKeyboardMarkup()
-        btn = types.InlineKeyboardButton('戳这里！', url = 'https://t.me/yahahaabot')
+        btn = types.InlineKeyboardButton('戳这里！', url='https://t.me/yahahaabot')
         markup.add(btn)
-        msg_id = bot.send_message(chat_id=message.chat.id, text=u'为了防止刷屏，请在私聊中使用此命令哦～',reply_markup=markup).message_id
+        msg_id = bot.send_message(chat_id=message.chat.id, text=u'为了防止刷屏，请在私聊中使用此命令哦～',
+                                  reply_markup=markup).message_id
         time.sleep(5)
-        bot.delete_message(message.chat.id,msg_id)
+        bot.delete_message(message.chat.id, msg_id)
 
     elif menu == 5:
         markup = types.InlineKeyboardMarkup()
         markup.row(types.InlineKeyboardButton(text='English', callback_data='chooselang:en'),
                    types.InlineKeyboardButton(text='فارسی', callback_data='chooselang:fa'))
-        bot.send_message(message.chat.id, "Hi \n\n Welcome To TweenRoBOT \n\n Please Choose One :)", disable_notification=True,
+        bot.send_message(message.chat.id, "Hi \n\n Welcome To TweenRoBOT \n\n Please Choose One :)",
+                         disable_notification=True,
                          reply_markup=markup)
     # --- Multi Lang ---
     elif menu == 6:
@@ -199,8 +217,9 @@ def menu_keyboard_manager(message: Message = None, menu = 1):
         assert 'Title' in json_str
         assert 'caption' not in json_str
         assert 'reply_markup' in json_str
-        bot.send_message(message.chat.id, "Hi \n\n Welcome To TweenRoBOT \n\n Please Choose One :)", disable_notification=True,
-                 reply_markup=markup)
+        bot.send_message(message.chat.id, "Hi \n\n Welcome To TweenRoBOT \n\n Please Choose One :)",
+                         disable_notification=True,
+                         reply_markup=markup)
     elif menu == 7:
         text = 'CI Test Message'
         markup = types.InlineKeyboardMarkup()
@@ -217,7 +236,8 @@ def menu_keyboard_manager(message: Message = None, menu = 1):
         ret_msg = bot.send_message(message.from_user.id, text, disable_notification=True, reply_markup=markup)
         markup.add(types.InlineKeyboardButton("Google2", url="http://www.google.com"))
         markup.add(types.InlineKeyboardButton("Yahoo2", url="http://www.yahoo.com"))
-        new_msg = bot.edit_message_reply_markup(chat_id=message.from_user.id, message_id=ret_msg.message_id, reply_markup=markup)
+        new_msg = bot.edit_message_reply_markup(chat_id=message.from_user.id, message_id=ret_msg.message_id,
+                                                reply_markup=markup)
         assert new_msg.message_id
 
     elif menu == 9:
@@ -251,6 +271,7 @@ def menu_keyboard_manager(message: Message = None, menu = 1):
             )
         keyboard = types.InlineKeyboardMarkup(buttons)
         bot.send_message(message.from_user.id, text='f', reply_markup=keyboard)
+
 
 def keyboard_manager(action: str):
     print(13)
@@ -307,27 +328,28 @@ def verify_user(message: Message, from_start=False):
 
     return False
 
+
 @bot.callback_query_handler(func=lambda call: True)
 def handle_query(call):
-
     print(call.data)
 
-    if call.data=="training_list":
+    if call.data == "training_list":
         bot.answer_callback_query(callback_query_id=call.id,
-                              show_alert=False,
-                              text="You Clicked " + call.data)
+                                  show_alert=False,
+                                  text="You Clicked " + call.data)
         delete_message = bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        print(123)
         menu_keyboard_manager(message=call.message, menu="training_list")
-    elif call.data=="my_results":
+    elif call.data == "my_results":
         bot.answer_callback_query(callback_query_id=call.id,
-                              show_alert=False,
-                              text="You Clicked " + call.data)
+                                  show_alert=False,
+                                  text="You Clicked " + call.data)
         delete_message = bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
         menu_keyboard_manager(message=call.message, menu="my_results")
-    elif call.data=="main_menu":
+    elif call.data == "main_menu":
         bot.answer_callback_query(callback_query_id=call.id,
-                              show_alert=False,
-                              text="You Clicked " + call.data)
+                                  show_alert=False,
+                                  text="You Clicked " + call.data)
         delete_message = bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
         menu_keyboard_manager(message=call.message, menu="main_menu")
 
@@ -476,7 +498,7 @@ while True:
     try:
         bot.setup_resources()
         bot.polling(none_stop=True, timeout=123)
-        #bot.infinity_polling(timeout=10, long_polling_timeout=5)
+        # bot.infinity_polling(timeout=10, long_polling_timeout=5)
         print(f'restart bot {datetime.now()}')
     # inform admin about error
     except JSONDecodeError as err:
