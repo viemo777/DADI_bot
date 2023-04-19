@@ -159,7 +159,7 @@ def menu_keyboard_manager(message: Message = None, menu=1):
         for training in list_of_trainings:
             text = text + f"🔍 /{training['training_id']}\n{training['text']} \n_Завершить до 45,21,6542_\n\n"
         markup.add(types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
-        text = text.replace('.', '\.')
+        text = text.replace('.', '\.').replace('= ', '\= ').replace('(', '\(').replace(')', '\)')
 
         bot.send_message(message.chat.id,
                          text=text, reply_markup=markup, parse_mode='MarkdownV2')
@@ -167,10 +167,11 @@ def menu_keyboard_manager(message: Message = None, menu=1):
 
     elif menu == "my_results":
         print("my_results_menu")
-        bot.send_message(message.chat.id, "Ваш коэффициент эффективности за текущий месяц = 0,96. \n"
+        bot.send_message(message.chat.id, "*ВАШИ РЕЗУЛЬТАТЫ* \n\n"
+                                          "Ваш коэффициент эффективности за текущий месяц \= 0,96 \n"
                                           "Ваша эффективность выше среднего по компании на 4% \n"
-                                          "Количество пройденных тренингов за текущий месяц = 3. \n"
-                                          "Количество непройденных тренингов = 5. \n")
+                                          "Количество пройденных тренингов за текущий месяц \= 3 \n"
+                                          "Количество непройденных тренингов \= 5 \n", parse_mode='MarkdownV2')
 
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 2
@@ -362,6 +363,8 @@ def verify_user(message: Message, from_start=False):
 @bot.callback_query_handler(func=lambda call: True)
 def handle_query(call):
     print(call.data)
+    if not verify_user(message=call.message):
+        exit()
     print("здесь проверять доспупы юзера как verify_user")
 
     if call.data == "training_list":
