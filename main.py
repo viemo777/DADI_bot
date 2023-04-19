@@ -2,6 +2,12 @@
 # ADMIN_CHAT_ID = 568869711
 # TOKEN - токен чатбота, берется из @BotFather
 
+
+# это примеры форматирования текста
+# bot.send_message(call.message.chat.id, 'Пример оформления текста: *bold* или __подчеркнутый__ или ~зачеркнутый~ или _italic \*text_ или ||spoiler||', parse_mode="MarkdownV2")
+# bot.send_message(call.message.chat.id, "`inline fixed-width code`", parse_mode="MarkdownV2")
+
+
 import json
 import time
 
@@ -117,29 +123,29 @@ def create_list_of_trainings(message: Message) -> list:
 
     # запрашиваем список тренингов из БД по Пользователю message.from_user.id. Обрабатываем в цикле и формируем сообщения. Оформляем одинаковой ширины
     list_of_trainings = [{'text': 'Инструкция по технике безопасности на рабочем месте от 22.03.2023',
-                    'training_id': 'Training32182384'},
-                    {'text': 'Методология организации процесса Приемка работ по ремонту сетей и оборудования',
-                    'training_id': 'Training45234'},
-                    {'text': 'Приказ о соблюдении мер для профилактики коронавируса',
-                     'training_id': 'Training2342344'}]
-    number_per_row = 40
+                          'training_id': 'Training32182384'},
+                         {'text': 'Методология организации процесса Приемка работ по ремонту сетей и оборудования',
+                          'training_id': 'Training45234'},
+                         {'text': 'Приказ о соблюдении мер для профилактики коронавируса',
+                          'training_id': 'Training2342344'}]
+    number_per_row = 1000
 
     for x in range(len(list_of_trainings)):
         text = list_of_trainings[x]['text']
-        list_of_trainings[x]['text'] = '\n    '.join([text[x * number_per_row:(x + 1) * number_per_row] for x in range(len(text) // number_per_row + 1)])
+        list_of_trainings[x]['text'] = '\n'.join(
+            [text[x * number_per_row:(x + 1) * number_per_row] for x in range(len(text) // number_per_row + 1)])
 
     return list_of_trainings
 
 
 def menu_keyboard_manager(message: Message = None, menu=1):
     print(14)
-    print('здесь проверять права пользоваиеляб как и в verify_user')
+    print('здесь проверять права пользователя, как и в verify_user')
 
     if menu == "training_list":
         print("training_list_menu")
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 1
-
 
         list_of_trainings = create_list_of_trainings(message=message)
         # for training in list_of_trainings:
@@ -149,36 +155,37 @@ def menu_keyboard_manager(message: Message = None, menu=1):
         #
         # markup.add(types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
         # bot.send_message(message.chat.id, "Возврат в главное меню", reply_markup=markup)
-        text = "🧮 Cписок ваших незавершенных тренингов. \n    Для продолжения выберите тренинг:\n\n"
+        text = "🧮 *СПИСОК ТРЕНИНГОВ* \n\n"
         for training in list_of_trainings:
-            text = text + f"🔍 {training['text']} \n    /{training['training_id']}\n\n"
+            text = text + f"🔍 /{training['training_id']}\n{training['text']} \n_Завершить до 45,21,6542_\n\n"
         markup.add(types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
+        text = text.replace('.', '\.')
 
         bot.send_message(message.chat.id,
-                         text=text, reply_markup=markup)
+                         text=text, reply_markup=markup, parse_mode='MarkdownV2')
 
 
     elif menu == "my_results":
         print("my_results_menu")
         bot.send_message(message.chat.id, "Ваш коэффициент эффективности за текущий месяц = 0,96. \n"
                                           "Ваша эффективность выше среднего по компании на 4% \n"
-                                            "Количество пройденных тренингов за текущий месяц = 3. \n"
+                                          "Количество пройденных тренингов за текущий месяц = 3. \n"
                                           "Количество непройденных тренингов = 5. \n")
 
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 2
         markup.add(types.InlineKeyboardButton("📲 Меню", callback_data="main_menu"),
-                   types.InlineKeyboardButton("🥇 Мои тренинги", callback_data="training_list"))
-        bot.send_message(message.chat.id, "Выберите следующее действие:", reply_markup=markup)
+                   types.InlineKeyboardButton("📋 Мои тренинги", callback_data="training_list"))
+        bot.send_message(message.chat.id, "Выберите следующее действие:", reply_markup=markup, parse_mode='MarkdownV2')
     elif menu == "main_menu":
         print("main_menu_menu")
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 2
-        markup.add(types.InlineKeyboardButton("👨‍🏫 Мои тренинги", callback_data="training_list"),
+        markup.add(types.InlineKeyboardButton("📋 Мои тренинги", callback_data="training_list"),
                    types.InlineKeyboardButton("🥇 Мои результаты", callback_data="my_results"),
-                   types.InlineKeyboardButton("🌐 Открыть в WEB", url="https://www.google.com/"))
-        bot.send_message(message.chat.id, "Главное меню. \n"
-                                          "Выберите следующее действие:", reply_markup=markup)
+                   types.InlineKeyboardButton("🌐 Открыть в WEB", url="https://192.168.25.55/doctrina-auth/next"))
+        bot.send_message(message.chat.id, "*ГЛАВНОЕ МЕНЮ*\ \n"
+                                          "Выберите следующее действие:", reply_markup=markup, parse_mode='MarkdownV2')
 
     elif menu == 10:
         markup = types.InlineKeyboardMarkup()
@@ -314,7 +321,7 @@ def verify_user(message: Message, from_start=False):
     # регистрируются только пользователи, если они отправили номер телефона и этот номер есть в белом списке
     user_id = message.from_user.id
     username = message.from_user.username
-#    chat_id = message.chat.id
+    #    chat_id = message.chat.id
 
     with open('whitelist_phone_numbers.txt', 'r') as file:
         # read all content of a file
@@ -355,7 +362,7 @@ def verify_user(message: Message, from_start=False):
 @bot.callback_query_handler(func=lambda call: True)
 def handle_query(call):
     print(call.data)
-    print("здесь проверять доспупы юзthf как verify_user")
+    print("здесь проверять доспупы юзера как verify_user")
 
     if call.data == "training_list":
         bot.answer_callback_query(callback_query_id=call.id,
