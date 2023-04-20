@@ -15,8 +15,10 @@ from datetime import datetime, date
 from json import JSONDecodeError
 from logging import StreamHandler, getLogger
 
+import requests
 import telebot
 from envparse import Env
+from requests import HTTPError
 from telebot.types import Message
 
 from ChatGPT import OpenAIWrapper
@@ -118,24 +120,49 @@ def echo_all(message: Message):
         pass
 
 
-def create_list_of_trainings(message: Message) -> list:
-    print(15)
+def get_user_email(message):
+    print('добавить в БД поле для eMail и записывать туда eMail пользователя, предварительно запросив его в боте')
 
-    # запрашиваем список тренингов из БД по Пользователю message.from_user.id. Обрабатываем в цикле и формируем сообщения. Оформляем одинаковой ширины
-    list_of_trainings = [{'text': 'Инструкция по технике безопасности на рабочем месте от 22.03.2023',
-                          'training_id': 'Training32182384'},
-                         {'text': 'Методология организации процесса Приемка работ по ремонту сетей и оборудования',
-                          'training_id': 'Training45234'},
-                         {'text': 'Приказ о соблюдении мер для профилактики коронавируса',
-                          'training_id': 'Training2342344'}]
-    number_per_row = 1000
+    temp = "vitalii.mocanu@dsi.md"
+    return temp
 
-    for x in range(len(list_of_trainings)):
-        text = list_of_trainings[x]['text']
-        list_of_trainings[x]['text'] = '\n'.join(
-            [text[x * number_per_row:(x + 1) * number_per_row] for x in range(len(text) // number_per_row + 1)])
 
-    return list_of_trainings
+def get_list_of_trainings(message: Message):
+    print(16)
+    print('здесь заменить в адресе запроса email на email пользователя')
+
+    try:
+        response = requests.get(
+            f"http://192.168.25.55/doctrina/training/get-trainings-list?email={get_user_email(message=message)}")
+        if response.status_code == 200:
+            response = response.json()
+            return [{'training_id': x['id'],
+                     'final_data': datetime.strptime(x['training']['edata'], "%Y-%m-%dT%H:%M:%S").date(),
+                     'name': x['training']['trainingTemplate']['name'],
+                     'Required': x['refRequiredValDto']['id']} for x in response]
+
+        elif response.status_code == 500:
+            print("Not Found")
+        else:
+            print("Error")
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')
+    except Exception as err:
+        print(f'Other error occurred: {err}')
+
+
+# def create_list_of_trainings(message: Message) -> list:
+#     print(15)
+#
+#     list_of_trainings = get_list_of_trainings(message=message)
+#     # number_per_row = 1000
+#     #
+#     # for x in range(len(list_of_trainings)):
+#     #     text = list_of_trainings[x]['name']
+#     #     list_of_trainings[x]['name'] = '\n'.join(
+#     #         [text[x * number_per_row:(x + 1) * number_per_row] for x in range(len(text) // number_per_row + 1)])
+#
+#     return list_of_trainings
 
 
 def menu_keyboard_manager(message: Message = None, menu=1):
@@ -147,19 +174,11 @@ def menu_keyboard_manager(message: Message = None, menu=1):
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 1
 
-        list_of_trainings = create_list_of_trainings(message=message)
-        # for training in list_of_trainings:
-        #     bot.send_message(message.chat.id,
-        #                  text=f"🔍 {training['text']} \n/{training['training_id']}")
-        #
-        #
-        # markup.add(types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
-        # bot.send_message(message.chat.id, "Возврат в главное меню", reply_markup=markup)
-        text = "🧮 *СПИСОК ТРЕНИНГОВ* \n\n"
-        for training in list_of_trainings:
-            text = text + f"🔍 /{training['training_id']}\n{training['text']} \n_Завершить до 45,21,6542_\n\n"
-        markup.add(types.InlineKeyboardButton("📲 Вернуться в меню", callback_data="main_menu"))
-        text = text.replace('.', '\.').replace('= ', '\= ').replace('(', '\(').replace(')', '\)')
+        text = "📋 *СПИСОК ТРЕНИНГОВ* \n\n"
+        for training in get_list_of_trainings(message=message):
+            text = text + f"🚀 /Training{training['training_id']}\n{training['name']} \n_Завершить до {training['final_data']}_\n\n"
+        markup.add(types.InlineKeyboardButton("🏠 Вернуться в меню", callback_data="main_menu"))
+        text = text.replace('.', '\.').replace('= ', '\= ').replace('(', '\(').replace(')', '\)').replace('-', '\-')
 
         bot.send_message(message.chat.id,
                          text=text, reply_markup=markup, parse_mode='MarkdownV2')
@@ -167,15 +186,15 @@ def menu_keyboard_manager(message: Message = None, menu=1):
 
     elif menu == "my_results":
         print("my_results_menu")
-        bot.send_message(message.chat.id, "*ВАШИ РЕЗУЛЬТАТЫ* \n\n"
-                                          "Ваш коэффициент эффективности за текущий месяц \= 0,96 \n"
-                                          "Ваша эффективность выше среднего по компании на 4% \n"
-                                          "Количество пройденных тренингов за текущий месяц \= 3 \n"
-                                          "Количество непройденных тренингов \= 5 \n", parse_mode='MarkdownV2')
+        bot.send_message(message.chat.id, "*🏆 ВАШИ РЕЗУЛЬТАТЫ* за текущий месяц \n\n"
+
+                                          "Коэффициент успешности \- 0,95 \n\n"
+                                          "Пройдено тренингов \- 3  \n\n"
+                                          "Не пройдено тренингов \- 5 \n", parse_mode='MarkdownV2')
 
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 2
-        markup.add(types.InlineKeyboardButton("📲 Меню", callback_data="main_menu"),
+        markup.add(types.InlineKeyboardButton("🏠 Меню", callback_data="main_menu"),
                    types.InlineKeyboardButton("📋 Мои тренинги", callback_data="training_list"))
         bot.send_message(message.chat.id, "Выберите следующее действие:", reply_markup=markup, parse_mode='MarkdownV2')
     elif menu == "main_menu":
@@ -183,9 +202,9 @@ def menu_keyboard_manager(message: Message = None, menu=1):
         markup = types.InlineKeyboardMarkup()
         markup.row_width = 2
         markup.add(types.InlineKeyboardButton("📋 Мои тренинги", callback_data="training_list"),
-                   types.InlineKeyboardButton("🥇 Мои результаты", callback_data="my_results"),
+                   types.InlineKeyboardButton("🏆 Мои результаты", callback_data="my_results"),
                    types.InlineKeyboardButton("🌐 Открыть в WEB", url="https://192.168.25.55/doctrina-auth/next"))
-        bot.send_message(message.chat.id, "*ГЛАВНОЕ МЕНЮ*\ \n"
+        bot.send_message(message.chat.id, "*🏠 ГЛАВНОЕ МЕНЮ*\ \n"
                                           "Выберите следующее действие:", reply_markup=markup, parse_mode='MarkdownV2')
 
     elif menu == 10:
@@ -363,8 +382,8 @@ def verify_user(message: Message, from_start=False):
 @bot.callback_query_handler(func=lambda call: True)
 def handle_query(call):
     print(call.data)
-    if not verify_user(message=call.message):
-        exit()
+    # if not verify_user(message=call.message):
+    #     exit()
     print("здесь проверять доспупы юзера как verify_user")
 
     if call.data == "training_list":
